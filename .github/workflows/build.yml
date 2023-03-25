@@ -51,12 +51,9 @@ jobs:
         run: |
           # Build the Docker image
           docker build -t $ECR_REGISTRY/$IMAGE_NAME .
-          
-          # Login to Amazon ECR
-          $(aws ecr get-login --no-include-email --region $AWS_REGION)
-          
+
           # Tag the Docker image
           docker tag $ECR_REGISTRY/$IMAGE_NAME:latest $ECR_REGISTRY/$IMAGE_NAME:${{ github.sha }}
-          
+
           # Push the Docker image to Amazon ECR
           docker push $ECR_REGISTRY/$IMAGE_NAME:${{ github.sha }}
