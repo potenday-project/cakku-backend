@@ -10,6 +10,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    env:
+      ECR_REGISTRY: 236744963769.dkr.ecr.ap-northeast-2.amazonaws.com
+      IMAGE_NAME: invitation-api
+      AWS_REGION: ap-northeast-2
+
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -24,6 +29,31 @@ jobs:
           path: ~/.gradle/caches
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
           restore-keys: ${{ runner.os }}-gradle
-      - name:
+      - name: Build gradle
         run: chmod +x ./gradlew && ./gradlew build
 
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build, Tag, and Push Image to Amazon ECR
+        env:
+          ECR_REGISTRY: ${{ env.ECR_REGISTRY }}
+          IMAGE_NAME: ${{ env.IMAGE_NAME }}
+          AWS_REGION: ${{ env.AWS_REGION }}
+        run: |
+          # Build the Docker image
+          docker build -t $ECR_REGISTRY/$IMAGE_NAME .
+
+          # Tag the Docker image
+          docker tag $ECR_REGISTRY/$IMAGE_NAME:latest $ECR_REGISTRY/$IMAGE_NAME:${{ github.sha }}
+
+          # Push the Docker image to Amazon ECR
+          docker push -a $ECR_REGISTRY/$IMAGE_NAME
