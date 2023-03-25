@@ -56,4 +56,4 @@ jobs:
           docker tag $ECR_REGISTRY/$IMAGE_NAME:latest $ECR_REGISTRY/$IMAGE_NAME:${{ github.sha }}
 
           # Push the Docker image to Amazon ECR
-          docker push $ECR_REGISTRY/$IMAGE_NAME:${{ github.sha }}
+          docker push -a $ECR_REGISTRY/$IMAGE_NAME
