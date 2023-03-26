@@ -5,3 +5,13 @@ spring:
 management:
   server:
     port: 8081
+
+invitation:
+  aws:
+    s3:
+      access-key: accessKey
+      secret-key: secretKey
+      bucket-name: bucketName
+      region: ap-northeast-2
+      connection-timeout: 1000
+      request-timeout: 3000
