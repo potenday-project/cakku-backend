@@ -1,6 +1,6 @@
 package com.example.invitation.ui.auth
 
-import com.example.invitation.application.MemberApplicationService
+import com.example.invitation.application.member.MemberApplicationService
 import com.example.invitation.ui.ApiResponse
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
