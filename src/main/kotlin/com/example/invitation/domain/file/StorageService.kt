@@ -5,5 +5,5 @@ import java.io.OutputStream
 
 interface StorageService {
     fun upload(inputStream: InputStream, storageUploadRequestVo: StorageUploadRequestVo): StorageUploadResponseVo
-    fun download(outputStream: OutputStream, fileName: String)
+    fun download(outputStream: OutputStream, storageDownloadRequestVo: StorageDownloadRequestVo)
 }
