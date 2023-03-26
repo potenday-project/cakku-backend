@@ -1,6 +1,7 @@
-package com.example.invitation.ui
+package com.example.invitation.ui.member
 
 import com.example.invitation.application.MemberApplicationService
+import com.example.invitation.ui.ApiResponse
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController

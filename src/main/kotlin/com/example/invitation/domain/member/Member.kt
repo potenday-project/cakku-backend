@@ -15,7 +15,8 @@ class Member(
     @Id
     @GeneratedValue
     val memberId: Long = 0L,
-    val name: String,
+    val providerType: ProviderType,
+    val providerUserId: String,
 ) {
     @CreatedDate
     lateinit var createdAt: LocalDateTime
@@ -23,4 +24,12 @@ class Member(
     @LastModifiedDate
     lateinit var updatedAt: LocalDateTime
 
+    companion object {
+        fun anonymous(providerUserId: String): Member {
+            return Member(
+                providerType = ProviderType.ANONYMOUS,
+                providerUserId = providerUserId,
+            )
+        }
+    }
 }

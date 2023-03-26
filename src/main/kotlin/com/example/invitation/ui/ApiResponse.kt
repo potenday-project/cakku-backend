@@ -3,7 +3,7 @@ package com.example.invitation.ui
 class ApiResponse<T>(
     val code: String,
     val message: String,
-    val content: T? = null,
+    val data: T? = null,
 ) {
     companion object {
         fun success(): ApiResponse<Unit> {
@@ -13,11 +13,19 @@ class ApiResponse<T>(
             )
         }
 
+        fun <T> success(data: T): ApiResponse<T> {
+            return ApiResponse(
+                code = "SUCCESS",
+                message = "SUCCESS",
+                data = data,
+            )
+        }
+
         fun <T> success(contents: List<T>): ApiResponse<List<T>> {
             return ApiResponse(
                 code = "SUCCESS",
                 message = "SUCCESS",
-                content = contents,
+                data = contents,
             )
         }
 
