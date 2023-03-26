@@ -1,4 +1,4 @@
-package com.example.invitation.application
+package com.example.invitation.application.member
 
 import com.example.invitation.domain.member.Member
 import com.example.invitation.ui.member.MemberResponse
