@@ -25,8 +25,8 @@ class MemberServiceImpl(
 
     @Transactional
     override fun createMember(providerType: ProviderType, providerUserId: String): Member {
-        assert(providerType == ProviderType.ANONYMOUS) {
-            "Only anonymous provider type is allowed. providerType: $providerType, providerUserId: $providerUserId"
+        if (providerType != ProviderType.ANONYMOUS) {
+            throw IllegalArgumentException("Only anonymous provider type is allowed. providerType: $providerType, providerUserId: $providerUserId")
         }
         val member = Member.anonymous(providerUserId)
         return memberRepository.save(member)
