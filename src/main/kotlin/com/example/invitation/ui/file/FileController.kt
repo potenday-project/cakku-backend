@@ -3,11 +3,9 @@ package com.example.invitation.ui.file
 import com.example.invitation.application.file.FileApplicationService
 import com.example.invitation.application.file.FileUploadVo
 import com.example.invitation.ui.ApiResponse
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestPart
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 import org.springframework.web.multipart.MultipartFile
+import javax.servlet.http.HttpServletResponse
 
 @RestController
 @RequestMapping("/api/v1")
@@ -27,6 +25,17 @@ class FileController(
                     size = file.size,
                 )
             )
+        )
+    }
+
+    @GetMapping("/files/{fileId}")
+    fun download(
+        @PathVariable fileId: Long,
+        response: HttpServletResponse,
+    ) {
+        fileApplicationService.download(
+            fileId = fileId,
+            outputStream = response.outputStream,
         )
     }
 }
