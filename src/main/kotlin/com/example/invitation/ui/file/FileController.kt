@@ -36,6 +36,7 @@ class FileController(
         fileApplicationService.download(
             fileId = fileId,
             outputStream = response.outputStream,
+            response = response,
         )
     }
 }
