@@ -26,6 +26,7 @@ dependencies {
     implementation "io.springfox:springfox-boot-starter:${springfoxVersion}"
     runtimeOnly 'com.mysql:mysql-connector-j'
     implementation "com.amazonaws:aws-java-sdk-s3:${awsJavaSdkVersion}"
+    implementation "io.micrometer:micrometer-registry-prometheus:${micrometerPrometheusVersion}"
 
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     testRuntimeOnly 'com.h2database:h2'
