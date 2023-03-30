@@ -2,10 +2,7 @@ package com.example.invitation.ui.invitation
 
 import com.example.invitation.application.invitation.InvitationApplicationService
 import com.example.invitation.ui.ApiResponse
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RequestMapping("/api/v1/invitations")
 @RestController
