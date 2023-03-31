@@ -1,6 +1,7 @@
 package com.example.invitation.domain.card.template
 
 import com.example.invitation.domain.card.template.item.CardTemplateItem
+import com.example.invitation.domain.invitation.InvitationType
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedDate
 import org.springframework.data.jpa.domain.support.AuditingEntityListener
@@ -17,10 +18,26 @@ class CardTemplate(
     @OneToMany
     @JoinColumn(name = "cardTemplateId")
     val cardTemplateItems: List<CardTemplateItem> = emptyList(),
-
+    /**
+     * 초대 목적
+     */
+    val invitationType: InvitationType,
+    /**
+     * 이미지 주소
+     */
+    val imageUrl: String,
+    /**
+     * 이름
+     */
     val name: String,
-
-    val backgroundImageUrl: String,
+    /**
+     * 너비
+     */
+    val width: Int = 1808,
+    /**
+     * 높이
+     */
+    val height: Int = 1808,
 ) {
     @CreatedDate
     lateinit var createdAt: LocalDateTime

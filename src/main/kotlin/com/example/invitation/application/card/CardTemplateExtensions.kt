@@ -6,7 +6,7 @@ import com.example.invitation.ui.card.CardTemplateResponse
 fun CardTemplate.toDto(): CardTemplateResponse {
     return CardTemplateResponse(
         cardTemplateId = this.cardTemplateId,
-        backgroundImageUrl = this.backgroundImageUrl,
+        backgroundImageUrl = this.imageUrl,
         cardTemplateItems = this.cardTemplateItems.map { it.toDto() }
     )
 }
