@@ -1,15 +1,22 @@
 package com.example.invitation.ui.invitation
 
+import com.example.invitation.domain.card.image.CardImageCreateVo
+import com.example.invitation.domain.card.image.CardImageService
 import com.example.invitation.domain.card.template.CardTemplate
 import com.example.invitation.domain.card.template.CardTemplateRepository
 import com.example.invitation.domain.card.template.item.CardTemplateItem
 import com.example.invitation.domain.card.template.item.CardTemplateItemRepository
+import com.example.invitation.domain.file.File
+import com.example.invitation.domain.file.FileRepository
 import com.example.invitation.domain.invitation.InvitationDetailType
 import com.example.invitation.domain.invitation.InvitationType
 import org.junit.jupiter.api.Test
+import org.mockito.Mockito
+import org.mockito.Mockito.`when`
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
@@ -27,6 +34,12 @@ class InvitationControllerTest {
 
     @Autowired
     lateinit var cardTemplateItemRepository: CardTemplateItemRepository
+
+    @Autowired
+    lateinit var fileRepository: FileRepository
+
+    @MockBean
+    lateinit var cardImageService: CardImageService
 
     @Test
     fun testGetInvitation() {
@@ -76,6 +89,14 @@ class InvitationControllerTest {
                 ),
             )
         )
+        val file = File(
+            url = "url",
+            name = "filename",
+            contentType = "image/png",
+            size = 1L,
+        )
+        fileRepository.save(file)
+        `when`(cardImageService.createImage(any(CardImageCreateVo::class.java))).thenReturn(file)
         // when
         mockMvc.perform(
             post("/api/v1/invitations")
@@ -96,5 +117,7 @@ class InvitationControllerTest {
             // then
             .andExpect(status().isOk)
     }
+
+    private fun <T> any(type: Class<T>): T = Mockito.any(type)
 
 }
