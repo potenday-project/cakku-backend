@@ -15,3 +15,6 @@ invitation:
       region: ap-northeast-2
       connection-timeout: 1000
       request-timeout: 3000
+
+  mixpanel:
+    project-token:

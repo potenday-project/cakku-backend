@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional
 interface InvitationService {
     fun findById(invitationId: Long): Invitation?
     fun create(invitationDraftId: Long): Invitation
+    fun create(invitationRequestVo: InvitationRequestVo): Invitation
 }
 
 @Service
@@ -25,6 +26,12 @@ class InvitationServiceImpl(
         val invitationDraft = (invitationDraftService.findById(invitationDraftId)
             ?: throw IllegalArgumentException("InvitationDraft not found. invitationDraftId=$invitationDraftId"))
         val invitation = Invitation.from(invitationDraft)
+        return invitationRepository.save(invitation)
+    }
+
+    @Transactional
+    override fun create(invitationRequestVo: InvitationRequestVo): Invitation {
+        val invitation = Invitation.from(invitationRequestVo)
         return invitationRepository.save(invitation)
     }
 
