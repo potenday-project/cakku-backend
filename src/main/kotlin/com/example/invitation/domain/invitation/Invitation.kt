@@ -1,7 +1,6 @@
 package com.example.invitation.domain.invitation
 
 import com.example.invitation.domain.card.Card
-import com.example.invitation.domain.file.File
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedDate
 import org.springframework.data.jpa.domain.support.AuditingEntityListener
@@ -53,9 +52,6 @@ class Invitation(
      * 장소
      */
     val place: String? = null,
-    @OneToMany
-    @JoinColumn(name = "invitationId")
-    val files: List<File> = emptyList(),
     var deleted: Boolean = false
 ) {
     @CreatedDate
