@@ -2,7 +2,6 @@ package com.example.invitation.application.card
 
 import com.example.invitation.domain.card.template.CardTemplateService
 import com.example.invitation.domain.card.template.item.CardTemplateItemService
-import com.example.invitation.domain.invitation.InvitationDetailType
 import com.example.invitation.ui.card.CardTemplateItemResponse
 import com.example.invitation.ui.card.CardTemplateResponse
 import org.springframework.stereotype.Component
@@ -18,10 +17,10 @@ class CardApplicationService(
     }
 
     fun getCardTemplateItems(
-        invitationDetailType: InvitationDetailType?,
+        invitationDetailTypeId: Long?,
     ): List<CardTemplateItemResponse> {
         return cardTemplateItemService.getCardTemplateItems(
-            invitationDetailType = invitationDetailType
+            invitationDetailTypeId = invitationDetailTypeId
         ).map { it.toDto() }
     }
 }

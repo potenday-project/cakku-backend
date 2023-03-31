@@ -1,7 +1,6 @@
 package com.example.invitation.ui.card
 
 import com.example.invitation.application.card.CardApplicationService
-import com.example.invitation.domain.invitation.InvitationDetailType
 import com.example.invitation.ui.ApiResponse
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
@@ -15,10 +14,10 @@ class CardTemplateItemController(
 ) {
     @GetMapping
     fun getCardTemplateItems(
-        @RequestParam(required = false) invitationDetailType: InvitationDetailType?
+        @RequestParam(required = false) invitationDetailTypeId: Long?
     ): ApiResponse<List<CardTemplateItemResponse>> {
         return ApiResponse.success(
-            data = cardApplicationService.getCardTemplateItems(invitationDetailType)
+            data = cardApplicationService.getCardTemplateItems(invitationDetailTypeId)
         )
     }
 }

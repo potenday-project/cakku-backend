@@ -1,6 +1,5 @@
 package com.example.invitation.ui.invitation
 
-import com.example.invitation.domain.invitation.InvitationDetailType
 import java.time.LocalDate
 import java.time.LocalTime
 
@@ -9,7 +8,7 @@ data class InvitationResponse(
     val cardId: Long,
     val userName: String,
     val invitationTypeIndex: Int,
-    val invitationDetailType: InvitationDetailType,
+    val invitationDetailType: InvitationDetailTypeResponse,
     val summary: String,
     val description: String,
     val date: LocalDate?,
