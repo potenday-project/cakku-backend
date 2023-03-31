@@ -1,7 +1,6 @@
 package com.example.invitation.domain.invitation
 
 import com.example.invitation.domain.card.Card
-import com.example.invitation.domain.file.File
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedDate
 import org.springframework.data.jpa.domain.support.AuditingEntityListener
@@ -24,7 +23,7 @@ class Invitation(
     /**
      * 초대한 사람 이름
      */
-    val hostName: String,
+    val userName: String,
     /**
      * 초대 목적 - 캐주얼한 약속 / 파티 / 대결 및 결투신청
      */
@@ -52,10 +51,7 @@ class Invitation(
     /**
      * 장소
      */
-    val location: String? = null,
-    @OneToMany
-    @JoinColumn(name = "invitationId")
-    val files: List<File> = emptyList(),
+    val place: String? = null,
     var deleted: Boolean = false
 ) {
     @CreatedDate
@@ -67,14 +63,14 @@ class Invitation(
     companion object {
         fun from(invitationRequestVo: InvitationRequestVo): Invitation {
             return Invitation(
-                hostName = invitationRequestVo.hostName,
+                userName = invitationRequestVo.userName,
                 invitationType = invitationRequestVo.invitationType,
                 invitationDetailType = invitationRequestVo.invitationDetailType,
                 summary = invitationRequestVo.summary,
                 description = invitationRequestVo.description,
                 date = invitationRequestVo.date,
                 time = invitationRequestVo.time,
-                location = invitationRequestVo.location,
+                place = invitationRequestVo.place,
             )
         }
     }
