@@ -2,6 +2,7 @@ package com.example.invitation.domain.card
 
 import com.example.invitation.domain.card.template.CardTemplate
 import com.example.invitation.domain.card.template.item.CardTemplateItem
+import com.example.invitation.domain.file.File
 import com.example.invitation.domain.invitation.Invitation
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedDate
@@ -18,7 +19,9 @@ class Card(
     @OneToOne
     @JoinColumn(name = "invitationId")
     val invitation: Invitation,
-    var imageUrl: String? = null,
+    @ManyToOne
+    @JoinColumn(name = "fileId")
+    var file: File? = null,
     @ManyToOne
     val cardTemplate: CardTemplate,
     @ManyToMany
@@ -30,7 +33,7 @@ class Card(
     @LastModifiedDate
     lateinit var updatedAt: LocalDateTime
 
-    fun update(imageUrl: String) {
-        this.imageUrl = imageUrl
+    fun update(file: File) {
+        this.file = file
     }
 }

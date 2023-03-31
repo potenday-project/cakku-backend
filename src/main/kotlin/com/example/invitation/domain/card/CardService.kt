@@ -3,6 +3,7 @@ package com.example.invitation.domain.card
 import com.example.invitation.domain.card.template.CardTemplateNotFoundException
 import com.example.invitation.domain.card.template.CardTemplateRepository
 import com.example.invitation.domain.card.template.item.CardTemplateItemRepository
+import com.example.invitation.domain.file.File
 import com.example.invitation.domain.invitation.InvitationNotFoundException
 import com.example.invitation.domain.invitation.InvitationRepository
 import org.springframework.data.repository.findByIdOrNull
@@ -17,7 +18,7 @@ interface CardService {
         invitationId: Long,
     ): Card
 
-    fun updateCard(cardId: Long, imageUrl: String): Card
+    fun updateCard(cardId: Long, file: File): Card
 }
 
 @Service
@@ -42,19 +43,19 @@ class CardServiceImpl(
         val cardTemplateItems = cardTemplateItemRepository.findByCardTemplateItemIdIn(cardCreateVo.cardTemplateItemIds)
         val invitation = invitationRepository.findByIdOrNull(invitationId)
             ?: throw InvitationNotFoundException("초대장이 존재하지 않습니다. invitationId: $invitationId")
-        return cardRepository.save(
-            Card(
-                cardTemplate = cardTemplate,
-                cardTemplateItems = cardTemplateItems,
-                invitation = invitation,
-            )
+        val card = Card(
+            cardTemplate = cardTemplate,
+            cardTemplateItems = cardTemplateItems,
+            invitation = invitation,
         )
+        invitation.card = card
+        return cardRepository.save(card)
     }
 
     @Transactional
-    override fun updateCard(cardId: Long, imageUrl: String): Card {
+    override fun updateCard(cardId: Long, file: File): Card {
         return cardRepository.findByIdOrNull(cardId)
-            ?.apply { update(imageUrl) }
+            ?.apply { update(file) }
             ?: throw CardNotFoundException("존재하지 않는 카드입니다. cardId: $cardId")
     }
 }

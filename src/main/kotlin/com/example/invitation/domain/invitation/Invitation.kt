@@ -19,7 +19,7 @@ class Invitation(
     @GeneratedValue
     val invitationId: Long = 0L,
     @OneToOne(mappedBy = "invitation")
-    val card: Card? = null,
+    var card: Card? = null,
     /**
      * 초대한 사람 이름
      */
