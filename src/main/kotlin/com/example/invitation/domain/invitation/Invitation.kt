@@ -1,5 +1,6 @@
 package com.example.invitation.domain.invitation
 
+import com.example.invitation.domain.card.Card
 import com.example.invitation.domain.file.File
 import com.example.invitation.domain.invitation.draft.InvitationDraft
 import org.springframework.data.annotation.CreatedDate
@@ -17,6 +18,8 @@ class Invitation(
     @Id
     @GeneratedValue
     val invitationId: Long = 0L,
+    @OneToOne(mappedBy = "invitation")
+    val card: Card? = null,
     /**
      * 초대한 사람 이름
      */
@@ -66,6 +69,18 @@ class Invitation(
                 description = invitationDraft.description!!,
                 startedAt = invitationDraft.startedAt,
                 location = invitationDraft.location,
+            )
+        }
+
+        fun from(invitationRequestVo: InvitationRequestVo): Invitation {
+            return Invitation(
+                hostName = invitationRequestVo.hostName,
+                invitationType = invitationRequestVo.invitationType,
+                invitationDetailType = invitationRequestVo.invitationDetailType,
+                summary = invitationRequestVo.summary,
+                description = invitationRequestVo.description,
+                startedAt = invitationRequestVo.startedAt,
+                location = invitationRequestVo.location,
             )
         }
     }
