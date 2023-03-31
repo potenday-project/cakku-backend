@@ -6,7 +6,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.options
-import org.springframework.test.web.servlet.result.MockMvcResultHandlers
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 
 @SpringBootTest
@@ -17,8 +16,7 @@ class CorsTest {
 
     @Test
     fun testCors() {
-        mockMvc.perform(options("/api/v1/invitation-drafts"))
-            .andDo(MockMvcResultHandlers.print())
+        mockMvc.perform(options("/api/v1/invitations"))
             .andExpect(status().isOk)
     }
 }

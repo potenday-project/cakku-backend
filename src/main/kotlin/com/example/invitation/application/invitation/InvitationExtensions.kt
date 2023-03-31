@@ -14,7 +14,8 @@ fun Invitation.toDto(): InvitationResponse {
         invitationDetailType = this.invitationDetailType,
         summary = this.summary,
         description = this.description,
-        startedAt = this.startedAt,
+        date = this.date,
+        time = this.time,
         location = this.location,
     )
 }
@@ -26,7 +27,8 @@ fun InvitationRequest.toVo(): InvitationRequestVo {
         invitationDetailType = this.invitationDetailType,
         summary = this.summary,
         description = this.description,
-        startedAt = this.startedAt,
+        date = this.date,
+        time = this.time,
         location = this.location,
     )
 }
