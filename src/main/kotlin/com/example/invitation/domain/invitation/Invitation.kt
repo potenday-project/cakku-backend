@@ -1,6 +1,7 @@
 package com.example.invitation.domain.invitation
 
 import com.example.invitation.domain.card.Card
+import com.example.invitation.domain.invitation.detail.InvitationDetailType
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedDate
 import org.springframework.data.jpa.domain.support.AuditingEntityListener
@@ -31,6 +32,8 @@ class Invitation(
     /**
      * 초대 컨셉/분위기 - 초대 목적에 대한 추가 내용 ?
      */
+    @ManyToOne
+    @JoinColumn(name = "invitationDetailTypeId")
     val invitationDetailType: InvitationDetailType,
     /**
      * 초대장 요약 - 가이드 제공, 수정 가능

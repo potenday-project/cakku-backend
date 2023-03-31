@@ -1,6 +1,6 @@
 package com.example.invitation.domain.card.template.item
 
-import com.example.invitation.domain.invitation.InvitationDetailType
+import com.example.invitation.domain.invitation.detail.InvitationDetailType
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedDate
 import org.springframework.data.jpa.domain.support.AuditingEntityListener
@@ -16,10 +16,11 @@ class CardTemplateItem(
     /**
      * 초대 컨셉, 분위기
      */
-    @Enumerated(EnumType.STRING)
+    @ManyToOne
+    @JoinColumn(name = "invitationDetailTypeId")
     val invitationDetailType: InvitationDetailType,
     /**
-     * 이미지 주좃
+     * 이미지 주소
      */
     val imageUrl: String,
     /**

@@ -1,5 +1,6 @@
 package com.example.invitation.domain.invitation
 
+import com.example.invitation.domain.invitation.detail.InvitationDetailType
 import java.time.LocalDate
 import java.time.LocalTime
 

@@ -26,11 +26,11 @@ class ApiResponse<T>(
             )
         }
 
-        fun <T> success(contents: List<T>): ApiResponse<List<T>> {
+        fun <T> success(data: List<T>): ApiResponse<List<T>> {
             return ApiResponse(
                 code = successCode,
                 message = successMessage,
-                data = contents,
+                data = data,
             )
         }
 

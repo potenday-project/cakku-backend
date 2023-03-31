@@ -8,8 +8,9 @@ import com.example.invitation.domain.card.template.item.CardTemplateItem
 import com.example.invitation.domain.card.template.item.CardTemplateItemRepository
 import com.example.invitation.domain.file.File
 import com.example.invitation.domain.file.FileRepository
-import com.example.invitation.domain.invitation.InvitationDetailType
 import com.example.invitation.domain.invitation.InvitationType
+import com.example.invitation.domain.invitation.detail.InvitationDetailType
+import com.example.invitation.domain.invitation.detail.InvitationDetailTypeRepository
 import org.junit.jupiter.api.Test
 import org.mockito.Mockito
 import org.mockito.Mockito.`when`
@@ -38,6 +39,9 @@ class InvitationControllerTest {
     @Autowired
     lateinit var fileRepository: FileRepository
 
+    @Autowired
+    lateinit var invitationDetailTypeRepository: InvitationDetailTypeRepository
+
     @MockBean
     lateinit var cardImageService: CardImageService
 
@@ -58,11 +62,20 @@ class InvitationControllerTest {
             imageUrl = "imageUrl",
         )
         cardTemplateRepository.save(cardTemplate)
+        val invitationDetailType = invitationDetailTypeRepository.save(
+            InvitationDetailType(
+                invitationType = InvitationType.CASUAL,
+                name = "맥주",
+                emoji = "🍺",
+                description = "",
+            )
+        )
+
         cardTemplateItemRepository.saveAll(
             listOf(
                 CardTemplateItem(
                     cardTemplateItemId = 1L,
-                    invitationDetailType = InvitationDetailType.MEAL,
+                    invitationDetailType = invitationDetailType,
                     imageUrl = "imageUrl",
                     name = "name",
                     emoji = "emoji",
@@ -71,7 +84,7 @@ class InvitationControllerTest {
                 ),
                 CardTemplateItem(
                     cardTemplateItemId = 2L,
-                    invitationDetailType = InvitationDetailType.MEAL,
+                    invitationDetailType = invitationDetailType,
                     imageUrl = "imageUrl",
                     name = "name",
                     emoji = "emoji",
@@ -80,7 +93,7 @@ class InvitationControllerTest {
                 ),
                 CardTemplateItem(
                     cardTemplateItemId = 3L,
-                    invitationDetailType = InvitationDetailType.MEAL,
+                    invitationDetailType = invitationDetailType,
                     imageUrl = "imageUrl",
                     name = "name",
                     emoji = "emoji",
@@ -106,7 +119,7 @@ class InvitationControllerTest {
                     {
                         "userName": "userName",
                         "invitationTypeIndex": 0,
-                        "invitationDetailType": "MEAL",
+                        "invitationDetailTypeId": ${invitationDetailType.invitationDetailTypeId},
                         "summary": "밥 한 번 먹자",
                         "description": "K-밥약",
                         "cardTemplateId": $cardTemplateId,

@@ -7,6 +7,9 @@ import com.example.invitation.domain.card.image.CardImageService
 import com.example.invitation.domain.card.template.CardTemplateService
 import com.example.invitation.domain.card.template.item.CardTemplateItemService
 import com.example.invitation.domain.invitation.InvitationService
+import com.example.invitation.domain.invitation.InvitationType
+import com.example.invitation.domain.invitation.detail.InvitationDetailTypeService
+import com.example.invitation.ui.invitation.InvitationDetailTypeResponse
 import com.example.invitation.ui.invitation.InvitationRequest
 import com.example.invitation.ui.invitation.InvitationResponse
 import org.springframework.stereotype.Component
@@ -14,6 +17,7 @@ import org.springframework.stereotype.Component
 @Component
 class InvitationApplicationService(
     private val invitationService: InvitationService,
+    private val invitationDetailTypeService: InvitationDetailTypeService,
     private val cardService: CardService,
     private val cardImageService: CardImageService,
     private val cardTemplateService: CardTemplateService,
@@ -26,8 +30,9 @@ class InvitationApplicationService(
 
     fun createInvitation(invitationRequest: InvitationRequest): InvitationResponse {
         // 초대장 생성
+        val invitationDetailType = invitationDetailTypeService.getOne(invitationRequest.invitationDetailTypeId)
         val invitation = invitationService.create(
-            invitationRequest.toVo(),
+            invitationRequest.toVo(invitationDetailType),
         )
         // 카드 생성
         val card = cardService.createCard(
@@ -47,5 +52,10 @@ class InvitationApplicationService(
         // 카드 주소 업데이트
         cardService.updateCard(card.cardId, cardImageFile)
         return invitation.toDto()
+    }
+
+    fun getInvitationDetailTypes(invitationType: InvitationType?): List<InvitationDetailTypeResponse> {
+        return invitationDetailTypeService.getInvitationDetailTypes(invitationType)
+            .map { it.toDto() }
     }
 }
