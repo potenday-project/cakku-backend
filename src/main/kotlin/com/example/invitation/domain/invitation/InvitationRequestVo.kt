@@ -1,6 +1,7 @@
 package com.example.invitation.domain.invitation
 
-import java.time.LocalDateTime
+import java.time.LocalDate
+import java.time.LocalTime
 
 data class InvitationRequestVo(
     val hostName: String,
@@ -8,6 +9,7 @@ data class InvitationRequestVo(
     val invitationDetailType: InvitationDetailType,
     val summary: String,
     val description: String,
-    val startedAt: LocalDateTime? = null,
+    val date: LocalDate? = null,
+    val time: LocalTime? = null,
     val location: String? = null,
 )

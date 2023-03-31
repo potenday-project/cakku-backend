@@ -2,11 +2,12 @@ package com.example.invitation.domain.invitation
 
 import com.example.invitation.domain.card.Card
 import com.example.invitation.domain.file.File
-import com.example.invitation.domain.invitation.draft.InvitationDraft
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedDate
 import org.springframework.data.jpa.domain.support.AuditingEntityListener
+import java.time.LocalDate
 import java.time.LocalDateTime
+import java.time.LocalTime
 import javax.persistence.*
 
 /**
@@ -41,9 +42,13 @@ class Invitation(
      */
     val description: String,
     /**
+     * 날짜
+     */
+    var date: LocalDate? = null,
+    /**
      * 시간
      */
-    val startedAt: LocalDateTime? = null,
+    var time: LocalTime? = null,
     /**
      * 장소
      */
@@ -60,18 +65,6 @@ class Invitation(
     lateinit var updatedAt: LocalDateTime
 
     companion object {
-        fun from(invitationDraft: InvitationDraft): Invitation {
-            return Invitation(
-                hostName = invitationDraft.hostName!!,
-                invitationType = invitationDraft.invitationType!!,
-                invitationDetailType = invitationDraft.invitationDetailType!!,
-                summary = invitationDraft.summary!!,
-                description = invitationDraft.description!!,
-                startedAt = invitationDraft.startedAt,
-                location = invitationDraft.location,
-            )
-        }
-
         fun from(invitationRequestVo: InvitationRequestVo): Invitation {
             return Invitation(
                 hostName = invitationRequestVo.hostName,
@@ -79,7 +72,8 @@ class Invitation(
                 invitationDetailType = invitationRequestVo.invitationDetailType,
                 summary = invitationRequestVo.summary,
                 description = invitationRequestVo.description,
-                startedAt = invitationRequestVo.startedAt,
+                date = invitationRequestVo.date,
+                time = invitationRequestVo.time,
                 location = invitationRequestVo.location,
             )
         }
