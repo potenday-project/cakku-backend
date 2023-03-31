@@ -21,6 +21,8 @@ class InvitationDetailTypeServiceImpl(
     }
 
     override fun getInvitationDetailTypes(invitationType: InvitationType?): List<InvitationDetailType> {
-        return invitationDetailTypeRepository.findByInvitationType(invitationType)
+        return invitationType?.let {
+            invitationDetailTypeRepository.findByInvitationType(invitationType)
+        } ?: invitationDetailTypeRepository.findAll()
     }
 }
