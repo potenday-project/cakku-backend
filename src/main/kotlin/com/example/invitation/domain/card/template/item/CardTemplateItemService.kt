@@ -19,9 +19,8 @@ class CardTemplateItemServiceImpl(
     }
 
     override fun getCardTemplateItems(invitationDetailType: InvitationDetailType?): List<CardTemplateItem> {
-        invitationDetailType?.let {
-            return cardTemplateItemRepository.findByInvitationDetailType(it)
-        } ?: return cardTemplateItemRepository.findAll()
+        return invitationDetailType?.let { cardTemplateItemRepository.findByInvitationDetailType(it) }
+            ?: cardTemplateItemRepository.findAll()
     }
 }
 
