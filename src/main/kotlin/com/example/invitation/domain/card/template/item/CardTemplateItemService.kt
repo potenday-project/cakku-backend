@@ -1,10 +1,12 @@
 package com.example.invitation.domain.card.template.item
 
+import com.example.invitation.domain.invitation.InvitationDetailType
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
 interface CardTemplateItemService {
     fun findByIdIn(cardTemplateItemIds: Collection<Long>): List<CardTemplateItem>
+    fun getCardTemplateItems(invitationDetailType: InvitationDetailType?): List<CardTemplateItem>
 }
 
 @Service
@@ -16,5 +18,9 @@ class CardTemplateItemServiceImpl(
         return cardTemplateItemRepository.findByCardTemplateItemIdIn(cardTemplateItemIds)
     }
 
+    override fun getCardTemplateItems(invitationDetailType: InvitationDetailType?): List<CardTemplateItem> {
+        return invitationDetailType?.let { cardTemplateItemRepository.findByInvitationDetailType(it) }
+            ?: cardTemplateItemRepository.findAll()
+    }
 }
 

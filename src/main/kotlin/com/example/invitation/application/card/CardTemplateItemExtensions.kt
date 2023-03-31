@@ -6,5 +6,7 @@ import com.example.invitation.ui.card.CardTemplateItemResponse
 fun CardTemplateItem.toDto(): CardTemplateItemResponse {
     return CardTemplateItemResponse(
         cardTemplateItemId = this.cardTemplateItemId,
+        name = this.name,
+        emoji = this.emoji,
     )
 }
