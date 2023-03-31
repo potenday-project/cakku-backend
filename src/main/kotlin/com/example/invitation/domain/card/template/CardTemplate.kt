@@ -33,11 +33,11 @@ class CardTemplate(
     /**
      * 너비
      */
-    val width: Int = 1808,
+    val width: Int = 1080,
     /**
      * 높이
      */
-    val height: Int = 1808,
+    val height: Int = 1080,
 ) {
     @CreatedDate
     lateinit var createdAt: LocalDateTime
