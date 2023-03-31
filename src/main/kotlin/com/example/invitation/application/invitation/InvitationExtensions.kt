@@ -2,6 +2,7 @@ package com.example.invitation.application.invitation
 
 import com.example.invitation.domain.invitation.Invitation
 import com.example.invitation.domain.invitation.InvitationRequestVo
+import com.example.invitation.domain.invitation.InvitationType
 import com.example.invitation.ui.invitation.InvitationRequest
 import com.example.invitation.ui.invitation.InvitationResponse
 
@@ -10,7 +11,7 @@ fun Invitation.toDto(): InvitationResponse {
         invitationId = this.invitationId,
         cardId = this.card!!.cardId,
         userName = this.userName,
-        invitationType = this.invitationType,
+        invitationTypeIndex = this.invitationType.displayIndex,
         invitationDetailType = this.invitationDetailType,
         summary = this.summary,
         description = this.description,
@@ -23,7 +24,7 @@ fun Invitation.toDto(): InvitationResponse {
 fun InvitationRequest.toVo(): InvitationRequestVo {
     return InvitationRequestVo(
         userName = this.userName,
-        invitationType = this.invitationType,
+        invitationType = InvitationType.from(this.invitationTypeIndex),
         invitationDetailType = this.invitationDetailType,
         summary = this.summary,
         description = this.description,

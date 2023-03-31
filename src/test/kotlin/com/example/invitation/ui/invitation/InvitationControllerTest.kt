@@ -104,8 +104,8 @@ class InvitationControllerTest {
                 .content(
                     """
                     {
-                        "hostName": "hostName",
-                        "invitationType": "CASUAL",
+                        "userName": "userName",
+                        "invitationTypeIndex": 0,
                         "invitationDetailType": "MEAL",
                         "summary": "밥 한 번 먹자",
                         "description": "K-밥약",
