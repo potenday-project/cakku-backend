@@ -2,6 +2,10 @@ package com.example.invitation.application.invitation
 
 import com.example.invitation.domain.card.CardCreateVo
 import com.example.invitation.domain.card.CardService
+import com.example.invitation.domain.card.image.CardImageCreateVo
+import com.example.invitation.domain.card.image.CardImageService
+import com.example.invitation.domain.card.template.CardTemplateService
+import com.example.invitation.domain.card.template.item.CardTemplateItemService
 import com.example.invitation.domain.invitation.InvitationService
 import com.example.invitation.domain.invitation.draft.InvitationDraftService
 import com.example.invitation.ui.invitation.InvitationDraftResponse
@@ -15,6 +19,9 @@ class InvitationApplicationService(
     private val invitationDraftService: InvitationDraftService,
     private val invitationService: InvitationService,
     private val cardService: CardService,
+    private val cardImageService: CardImageService,
+    private val cardTemplateService: CardTemplateService,
+    private val cardTemplateItemService: CardTemplateItemService,
 ) {
     fun createInvitationDraft(): InvitationDraftResponse {
         return invitationDraftService.create().toDto()
@@ -46,7 +53,7 @@ class InvitationApplicationService(
         return invitation.toDto()
     }
 
-    fun createInvitation(invitationRequest: InvitationRequest) {
+    fun createInvitation(invitationRequest: InvitationRequest): InvitationResponse {
         // 초대장 생성
         val invitation = invitationService.create(
             invitationRequest.toVo(),
@@ -60,8 +67,14 @@ class InvitationApplicationService(
             invitationId = invitation.invitationId,
         )
         // 카드 파일 생성
-        val cardImageUrl = ""
+        val cardImageFile = cardImageService.createImage(
+            cardImageCreateVo = CardImageCreateVo(
+                cardTemplate = cardTemplateService.getCardTemplate(card.cardTemplate.cardTemplateId),
+                cardTemplateItems = cardTemplateItemService.findByIdIn(invitationRequest.cardTemplateItemIds),
+            ),
+        )
         // 카드 주소 업데이트
-        cardService.updateCard(card.cardId, cardImageUrl)
+        cardService.updateCard(card.cardId, cardImageFile)
+        return invitation.toDto()
     }
 }

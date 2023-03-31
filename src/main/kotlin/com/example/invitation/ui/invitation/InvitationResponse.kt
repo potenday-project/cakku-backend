@@ -6,6 +6,7 @@ import java.time.LocalDateTime
 
 data class InvitationResponse(
     val invitationId: Long,
+    val cardId: Long,
     val hostName: String,
     val invitationType: InvitationType,
     val invitationDetailType: InvitationDetailType,

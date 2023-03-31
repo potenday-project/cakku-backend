@@ -21,6 +21,7 @@ class CardTemplate(
     /**
      * 초대 목적
      */
+    @Enumerated(EnumType.STRING)
     val invitationType: InvitationType,
     /**
      * 이미지 주소

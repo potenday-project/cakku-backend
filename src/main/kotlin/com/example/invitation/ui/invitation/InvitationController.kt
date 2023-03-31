@@ -21,7 +21,7 @@ class InvitationController(
     @PostMapping
     fun createInvitation(
         @RequestBody invitationRequest: InvitationRequest,
-    ): ApiResponse<Unit> {
+    ): ApiResponse<InvitationResponse> {
         return ApiResponse.success(
             data = invitationApplicationService.createInvitation(invitationRequest),
         )
