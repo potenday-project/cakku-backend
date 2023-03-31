@@ -24,7 +24,7 @@ class Invitation(
     /**
      * 초대한 사람 이름
      */
-    val hostName: String,
+    val userName: String,
     /**
      * 초대 목적 - 캐주얼한 약속 / 파티 / 대결 및 결투신청
      */
@@ -52,7 +52,7 @@ class Invitation(
     /**
      * 장소
      */
-    val location: String? = null,
+    val place: String? = null,
     @OneToMany
     @JoinColumn(name = "invitationId")
     val files: List<File> = emptyList(),
@@ -67,14 +67,14 @@ class Invitation(
     companion object {
         fun from(invitationRequestVo: InvitationRequestVo): Invitation {
             return Invitation(
-                hostName = invitationRequestVo.hostName,
+                userName = invitationRequestVo.userName,
                 invitationType = invitationRequestVo.invitationType,
                 invitationDetailType = invitationRequestVo.invitationDetailType,
                 summary = invitationRequestVo.summary,
                 description = invitationRequestVo.description,
                 date = invitationRequestVo.date,
                 time = invitationRequestVo.time,
-                location = invitationRequestVo.location,
+                place = invitationRequestVo.place,
             )
         }
     }

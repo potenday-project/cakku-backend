@@ -8,12 +8,12 @@ import java.time.LocalTime
 data class InvitationResponse(
     val invitationId: Long,
     val cardId: Long,
-    val hostName: String,
+    val userName: String,
     val invitationType: InvitationType,
     val invitationDetailType: InvitationDetailType,
     val summary: String,
     val description: String,
     val date: LocalDate?,
     val time: LocalTime?,
-    val location: String?,
+    val place: String?,
 )

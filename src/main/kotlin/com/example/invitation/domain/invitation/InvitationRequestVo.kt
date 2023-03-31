@@ -4,12 +4,12 @@ import java.time.LocalDate
 import java.time.LocalTime
 
 data class InvitationRequestVo(
-    val hostName: String,
+    val userName: String,
     val invitationType: InvitationType,
     val invitationDetailType: InvitationDetailType,
     val summary: String,
     val description: String,
     val date: LocalDate? = null,
     val time: LocalTime? = null,
-    val location: String? = null,
+    val place: String? = null,
 )

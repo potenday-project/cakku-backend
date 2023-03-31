@@ -9,26 +9,26 @@ fun Invitation.toDto(): InvitationResponse {
     return InvitationResponse(
         invitationId = this.invitationId,
         cardId = this.card!!.cardId,
-        hostName = this.hostName,
+        userName = this.userName,
         invitationType = this.invitationType,
         invitationDetailType = this.invitationDetailType,
         summary = this.summary,
         description = this.description,
         date = this.date,
         time = this.time,
-        location = this.location,
+        place = this.place,
     )
 }
 
 fun InvitationRequest.toVo(): InvitationRequestVo {
     return InvitationRequestVo(
-        hostName = this.hostName,
+        userName = this.userName,
         invitationType = this.invitationType,
         invitationDetailType = this.invitationDetailType,
         summary = this.summary,
         description = this.description,
         date = this.date,
         time = this.time,
-        location = this.location,
+        place = this.place,
     )
 }
