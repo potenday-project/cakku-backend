@@ -23,8 +23,14 @@ class Card(
     @JoinColumn(name = "fileId")
     var file: File? = null,
     @ManyToOne
+    @JoinColumn(name = "cardTemplateId")
     val cardTemplate: CardTemplate,
     @ManyToMany
+    @JoinTable(
+        name = "card_template_item_map",
+        joinColumns = [JoinColumn(name = "cardId")],
+        inverseJoinColumns = [JoinColumn(name = "cardTemplateItemId")]
+    )
     val cardTemplateItems: List<CardTemplateItem>,
 ) {
     @CreatedDate
