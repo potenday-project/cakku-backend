@@ -13,6 +13,8 @@ import org.springframework.transaction.annotation.Transactional
 interface CardService {
     fun getCards(): List<Card>
 
+    fun getCard(cardId: Long): Card
+
     fun createCard(
         cardCreateVo: CardCreateVo,
         invitationId: Long,
@@ -31,6 +33,11 @@ class CardServiceImpl(
 ) : CardService {
     override fun getCards(): List<Card> {
         return cardRepository.findAll()
+    }
+
+    override fun getCard(cardId: Long): Card {
+        return cardRepository.findByIdOrNull(cardId)
+            ?: throw CardNotFoundException("카드가 존재하지 않입니다. cardId: $cardId")
     }
 
     @Transactional
