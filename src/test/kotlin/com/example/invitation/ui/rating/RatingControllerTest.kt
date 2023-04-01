@@ -10,9 +10,11 @@ import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
+import org.springframework.transaction.annotation.Transactional
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@Transactional
 class RatingControllerTest {
     @Autowired
     lateinit var mockMvc: MockMvc
@@ -33,9 +35,9 @@ class RatingControllerTest {
                 )
         )
             .andExpect(status().isOk)
-            .andExpect(jsonPath("$.data.ratingId").isNumber)
+            .andExpect(jsonPath("$.data.ratingId").isString)
             .andExpect(jsonPath("$.data.ratingType").value("GOOD"))
-            .andExpect(jsonPath("$.data.invitationId").value(null))
+            .andExpect(jsonPath("$.data.invitationId").isEmpty)
     }
 
     @DisplayName("createRating : NOT_GOOD")
@@ -54,8 +56,8 @@ class RatingControllerTest {
                 )
         )
             .andExpect(status().isOk)
-            .andExpect(jsonPath("$.data.ratingId").isNumber)
+            .andExpect(jsonPath("$.data.ratingId").isString)
             .andExpect(jsonPath("$.data.ratingType").value("NOT_GOOD"))
-            .andExpect(jsonPath("$.data.invitationId").value(null))
+            .andExpect(jsonPath("$.data.invitationId").isEmpty)
     }
 }

@@ -4,8 +4,8 @@ import java.time.LocalDate
 import java.time.LocalTime
 
 data class InvitationResponse(
-    val invitationId: Long,
-    val cardId: Long,
+    val invitationId: String,
+    val cardId: String,
     val userName: String,
     val invitationTypeIndex: Int,
     val invitationDetailType: InvitationDetailTypeResponse,

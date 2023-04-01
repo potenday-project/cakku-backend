@@ -1,7 +1,7 @@
 package com.example.invitation.ui.invitation
 
 data class InvitationDetailTypeResponse(
-    val invitationDetailTypeId: Long,
+    val invitationDetailTypeId: String,
     val invitationType: String,
     val name: String,
     val emoji: String,

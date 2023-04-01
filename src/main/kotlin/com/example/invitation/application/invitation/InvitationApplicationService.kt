@@ -4,8 +4,6 @@ import com.example.invitation.domain.card.CardCreateVo
 import com.example.invitation.domain.card.CardService
 import com.example.invitation.domain.card.image.CardImageCreateVo
 import com.example.invitation.domain.card.image.CardImageService
-import com.example.invitation.domain.card.template.CardTemplateService
-import com.example.invitation.domain.card.template.item.CardTemplateItemService
 import com.example.invitation.domain.invitation.InvitationService
 import com.example.invitation.domain.invitation.InvitationType
 import com.example.invitation.domain.invitation.detail.InvitationDetailTypeService
@@ -20,8 +18,6 @@ class InvitationApplicationService(
     private val invitationDetailTypeService: InvitationDetailTypeService,
     private val cardService: CardService,
     private val cardImageService: CardImageService,
-    private val cardTemplateService: CardTemplateService,
-    private val cardTemplateItemService: CardTemplateItemService,
 ) {
     fun getInvitation(invitationId: Long): InvitationResponse {
         val invitation = invitationService.findById(invitationId)
@@ -30,7 +26,7 @@ class InvitationApplicationService(
 
     fun createInvitation(invitationRequest: InvitationRequest): InvitationResponse {
         // 초대장 생성
-        val invitationDetailType = invitationDetailTypeService.getOne(invitationRequest.invitationDetailTypeId)
+        val invitationDetailType = invitationDetailTypeService.getOne(invitationRequest.invitationDetailTypeId.toLong())
         val invitation = invitationService.create(
             invitationRequest.toVo(invitationDetailType),
         )
@@ -38,15 +34,15 @@ class InvitationApplicationService(
         val card = cardService.createCard(
             cardCreateVo = CardCreateVo(
                 cardTemplateId = invitationDetailType.cardTemplate.cardTemplateId,
-                cardTemplateItemIds = invitationRequest.cardTemplateItemIds,
+                cardTemplateItemIds = invitationRequest.cardTemplateItemIds.map { it.toLong() },
             ),
             invitationId = invitation.invitationId,
         )
         // 카드 파일 생성
         val cardImageFile = cardImageService.createImage(
             cardImageCreateVo = CardImageCreateVo(
-                cardTemplate = cardTemplateService.getCardTemplate(card.cardTemplate.cardTemplateId),
-                cardTemplateItems = cardTemplateItemService.findByIdIn(invitationRequest.cardTemplateItemIds),
+                cardTemplate = card.cardTemplate,
+                cardTemplateItems = card.cardTemplateItems,
             ),
         )
         // 카드 주소 업데이트
