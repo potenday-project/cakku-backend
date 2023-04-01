@@ -1,5 +1,6 @@
 package com.example.invitation.domain.member
 
+import org.hibernate.annotations.GenericGenerator
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedDate
 import org.springframework.data.jpa.domain.support.AuditingEntityListener
@@ -13,7 +14,11 @@ import javax.persistence.Id
 @EntityListeners(AuditingEntityListener::class)
 class Member(
     @Id
-    @GeneratedValue
+    @GeneratedValue(generator = "SnowflakeIdGenerator")
+    @GenericGenerator(
+        name = "SnowflakeIdGenerator",
+        strategy = "com.example.invitation.infrastructure.SnowflakeIdGenerator",
+    )
     val memberId: Long = 0L,
     val providerType: ProviderType,
     val providerUserId: String,
