@@ -123,8 +123,7 @@ class InvitationControllerTest {
                         "invitationDetailTypeId": ${invitationDetailType.invitationDetailTypeId},
                         "summary": "밥 한 번 먹자",
                         "description": "K-밥약",
-                        "cardTemplateId": $cardTemplateId,
-                        "cardTemplateItemIds": [1,2,3]
+                        "cardTemplateItemIds": [1, 2, 3]
                     }""".trimIndent()
                 )
         )
