@@ -2,6 +2,7 @@ package com.example.invitation.domain.card.template
 
 import com.example.invitation.domain.card.template.item.CardTemplateItem
 import com.example.invitation.domain.invitation.InvitationType
+import org.hibernate.annotations.GenericGenerator
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedDate
 import org.springframework.data.jpa.domain.support.AuditingEntityListener
@@ -12,7 +13,11 @@ import javax.persistence.*
 @EntityListeners(AuditingEntityListener::class)
 class CardTemplate(
     @Id
-    @GeneratedValue
+    @GeneratedValue(generator = "SnowflakeIdGenerator")
+    @GenericGenerator(
+        name = "SnowflakeIdGenerator",
+        strategy = "com.example.invitation.infrastructure.SnowflakeIdGenerator",
+    )
     val cardTemplateId: Long = 0L,
 
     @OneToMany

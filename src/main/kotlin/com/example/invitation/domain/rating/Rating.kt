@@ -1,6 +1,7 @@
 package com.example.invitation.domain.rating
 
 import com.example.invitation.domain.invitation.Invitation
+import org.hibernate.annotations.GenericGenerator
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedDate
 import org.springframework.data.jpa.domain.support.AuditingEntityListener
@@ -11,7 +12,11 @@ import javax.persistence.*
 @EntityListeners(AuditingEntityListener::class)
 class Rating(
     @Id
-    @GeneratedValue
+    @GeneratedValue(generator = "SnowflakeIdGenerator")
+    @GenericGenerator(
+        name = "SnowflakeIdGenerator",
+        strategy = "com.example.invitation.infrastructure.SnowflakeIdGenerator",
+    )
     val ratingId: Long = 0L,
     val ratingType: RatingType,
     @ManyToOne

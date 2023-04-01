@@ -54,9 +54,7 @@ class InvitationControllerTest {
     @Test
     fun testCreateInvitation() {
         // given
-        val cardTemplateId = 1L
         val cardTemplate = CardTemplate(
-            cardTemplateId = cardTemplateId,
             invitationType = InvitationType.CASUAL,
             name = "name",
             imageUrl = "imageUrl",

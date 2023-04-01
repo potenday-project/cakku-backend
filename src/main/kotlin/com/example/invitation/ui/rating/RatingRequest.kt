@@ -4,5 +4,5 @@ import com.example.invitation.domain.rating.RatingType
 
 data class RatingRequest(
     val ratingType: RatingType,
-    val invitationId: Long?,
+    val invitationId: String?,
 )

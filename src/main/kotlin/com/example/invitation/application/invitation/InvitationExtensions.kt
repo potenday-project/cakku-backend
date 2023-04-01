@@ -9,8 +9,8 @@ import com.example.invitation.ui.invitation.InvitationResponse
 
 fun Invitation.toDto(): InvitationResponse {
     return InvitationResponse(
-        invitationId = this.invitationId,
-        cardId = this.card!!.cardId,
+        invitationId = this.invitationId.toString(),
+        cardId = this.card!!.cardId.toString(),
         userName = this.userName,
         invitationTypeIndex = this.invitationType.displayIndex,
         invitationDetailType = this.invitationDetailType.toDto(),
