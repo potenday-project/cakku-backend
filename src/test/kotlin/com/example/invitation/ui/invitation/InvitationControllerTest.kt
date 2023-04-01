@@ -64,6 +64,7 @@ class InvitationControllerTest {
         cardTemplateRepository.save(cardTemplate)
         val invitationDetailType = invitationDetailTypeRepository.save(
             InvitationDetailType(
+                cardTemplate = cardTemplate,
                 invitationType = InvitationType.CASUAL,
                 name = "맥주",
                 emoji = "🍺",

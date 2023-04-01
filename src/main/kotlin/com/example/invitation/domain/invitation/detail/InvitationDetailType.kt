@@ -1,5 +1,6 @@
 package com.example.invitation.domain.invitation.detail
 
+import com.example.invitation.domain.card.template.CardTemplate
 import com.example.invitation.domain.invitation.InvitationType
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedDate
@@ -13,6 +14,9 @@ class InvitationDetailType(
     @Id
     @GeneratedValue
     val invitationDetailTypeId: Long = 0L,
+    @ManyToOne
+    @JoinColumn(name = "cardTemplateId")
+    val cardTemplate: CardTemplate,
     @Enumerated(EnumType.STRING)
     val invitationType: InvitationType,
     val name: String,

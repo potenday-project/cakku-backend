@@ -1,5 +1,7 @@
 package com.example.invitation.ui.invitation
 
+import com.example.invitation.domain.card.template.CardTemplate
+import com.example.invitation.domain.card.template.CardTemplateRepository
 import com.example.invitation.domain.invitation.InvitationType
 import com.example.invitation.domain.invitation.detail.InvitationDetailType
 import com.example.invitation.domain.invitation.detail.InvitationDetailTypeRepository
@@ -21,31 +23,45 @@ class InvitationDetailTypeControllerTest {
     lateinit var invitationDetailTypeRepository: InvitationDetailTypeRepository
 
     @Autowired
+    lateinit var cardTemplateRepository: CardTemplateRepository
+
+    @Autowired
     lateinit var mockMvc: MockMvc
 
     @Test
     fun getInvitationDetailTypes() {
+        val cardTemplate = cardTemplateRepository.save(
+            CardTemplate(
+                invitationType = InvitationType.CASUAL,
+                name = "카드 템플릿",
+                imageUrl = "imageUrl",
+            )
+        )
         invitationDetailTypeRepository.saveAll(
             listOf(
                 InvitationDetailType(
+                    cardTemplate = cardTemplate,
                     invitationType = InvitationType.CASUAL,
                     name = "밥약속",
                     emoji = "🍚",
                     description = "",
                 ),
                 InvitationDetailType(
+                    cardTemplate = cardTemplate,
                     invitationType = InvitationType.CASUAL,
                     name = "술약속",
                     emoji = "🍺",
                     description = "",
                 ),
                 InvitationDetailType(
+                    cardTemplate = cardTemplate,
                     invitationType = InvitationType.CASUAL,
                     name = "소풍 & 여행",
                     emoji = "🎒",
                     description = "",
                 ),
                 InvitationDetailType(
+                    cardTemplate = cardTemplate,
                     invitationType = InvitationType.CASUAL,
                     name = "기타",
                     emoji = "🪄",

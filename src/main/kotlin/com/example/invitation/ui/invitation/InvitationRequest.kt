@@ -12,6 +12,5 @@ data class InvitationRequest(
     val date: LocalDate? = null,
     val time: LocalTime? = null,
     val place: String? = null,
-    val cardTemplateId: Long,
     val cardTemplateItemIds: List<Long>,
 )

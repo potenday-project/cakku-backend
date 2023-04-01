@@ -37,7 +37,7 @@ class InvitationApplicationService(
         // 카드 생성
         val card = cardService.createCard(
             cardCreateVo = CardCreateVo(
-                cardTemplateId = invitationRequest.cardTemplateId,
+                cardTemplateId = invitationDetailType.cardTemplate.cardTemplateId,
                 cardTemplateItemIds = invitationRequest.cardTemplateItemIds,
             ),
             invitationId = invitation.invitationId,
