@@ -74,7 +74,6 @@ class InvitationControllerTest {
             listOf(
                 CardTemplateItem(
                     cardTemplateItemId = 1L,
-                    invitationDetailType = invitationDetailType,
                     imageUrl = "imageUrl",
                     name = "name",
                     emoji = "emoji",
@@ -83,7 +82,6 @@ class InvitationControllerTest {
                 ),
                 CardTemplateItem(
                     cardTemplateItemId = 2L,
-                    invitationDetailType = invitationDetailType,
                     imageUrl = "imageUrl",
                     name = "name",
                     emoji = "emoji",
@@ -92,7 +90,6 @@ class InvitationControllerTest {
                 ),
                 CardTemplateItem(
                     cardTemplateItemId = 3L,
-                    invitationDetailType = invitationDetailType,
                     imageUrl = "imageUrl",
                     name = "name",
                     emoji = "emoji",

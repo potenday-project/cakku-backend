@@ -5,7 +5,7 @@ import org.springframework.transaction.annotation.Transactional
 
 interface CardTemplateItemService {
     fun findByIdIn(cardTemplateItemIds: Collection<Long>): List<CardTemplateItem>
-    fun getCardTemplateItems(invitationDetailTypeId: Long?): List<CardTemplateItem>
+    fun findAll(): List<CardTemplateItem>
 }
 
 @Service
@@ -17,10 +17,8 @@ class CardTemplateItemServiceImpl(
         return cardTemplateItemRepository.findByCardTemplateItemIdInAndDeleted(cardTemplateItemIds, false)
     }
 
-    override fun getCardTemplateItems(invitationDetailTypeId: Long?): List<CardTemplateItem> {
-        return invitationDetailTypeId?.let {
-            cardTemplateItemRepository.findByInvitationDetailType_invitationDetailTypeIdAndDeleted(it, false)
-        } ?: cardTemplateItemRepository.findAll()
+    override fun findAll(): List<CardTemplateItem> {
+        return cardTemplateItemRepository.findByDeleted(false)
     }
 }
 
