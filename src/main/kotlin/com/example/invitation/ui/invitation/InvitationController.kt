@@ -1,6 +1,8 @@
 package com.example.invitation.ui.invitation
 
 import com.example.invitation.application.invitation.InvitationApplicationService
+import com.example.invitation.domain.analytics.AnalyticsEvent
+import com.example.invitation.domain.analytics.AnalyticsEventPublished
 import com.example.invitation.ui.ApiResponse
 import org.springframework.web.bind.annotation.*
 
@@ -19,6 +21,7 @@ class InvitationController(
     }
 
     @PostMapping
+    @AnalyticsEventPublished(event = AnalyticsEvent.INVITATION_CREATED)
     fun createInvitation(
         @RequestBody invitationRequest: InvitationRequest,
     ): ApiResponse<InvitationResponse> {
