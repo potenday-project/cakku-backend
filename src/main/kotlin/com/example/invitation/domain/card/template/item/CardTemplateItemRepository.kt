@@ -13,4 +13,6 @@ interface CardTemplateItemRepository : JpaRepository<CardTemplateItem, Long> {
         invitationDetailTypeId: Long,
         deleted: Boolean
     ): List<CardTemplateItem>
+
+    fun findByDeleted(deleted: Boolean): List<CardTemplateItem>
 }
