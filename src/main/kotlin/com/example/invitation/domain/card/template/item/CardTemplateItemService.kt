@@ -14,16 +14,13 @@ class CardTemplateItemServiceImpl(
     private val cardTemplateItemRepository: CardTemplateItemRepository,
 ) : CardTemplateItemService {
     override fun findByIdIn(cardTemplateItemIds: Collection<Long>): List<CardTemplateItem> {
-        return cardTemplateItemRepository.findByCardTemplateItemIdIn(cardTemplateItemIds)
+        return cardTemplateItemRepository.findByCardTemplateItemIdInAndDeleted(cardTemplateItemIds, false)
     }
 
     override fun getCardTemplateItems(invitationDetailTypeId: Long?): List<CardTemplateItem> {
         return invitationDetailTypeId?.let {
-            cardTemplateItemRepository.findByInvitationDetailType_invitationDetailTypeId(
-                it
-            )
-        }
-            ?: cardTemplateItemRepository.findAll()
+            cardTemplateItemRepository.findByInvitationDetailType_invitationDetailTypeIdAndDeleted(it, false)
+        } ?: cardTemplateItemRepository.findAll()
     }
 }
 
