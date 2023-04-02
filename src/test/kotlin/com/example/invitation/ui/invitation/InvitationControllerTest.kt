@@ -57,7 +57,7 @@ class InvitationControllerTest {
     @BeforeEach
     fun setup() {
         doNothing().`when`(mixpanelEventPublisher)
-            .publish(any(String::class.java), any(AnalyticsEvent::class.java));
+            .publish(any(String::class.java), any(AnalyticsEvent::class.java))
     }
 
     @Test

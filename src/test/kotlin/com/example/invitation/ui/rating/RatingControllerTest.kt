@@ -30,7 +30,7 @@ class RatingControllerTest {
     @BeforeEach
     fun setup() {
         Mockito.doNothing().`when`(mixpanelEventPublisher)
-            .publish(any(String::class.java), any(AnalyticsEvent::class.java));
+            .publish(any(String::class.java), any(AnalyticsEvent::class.java))
     }
 
     @DisplayName("createRating : GOOD")
