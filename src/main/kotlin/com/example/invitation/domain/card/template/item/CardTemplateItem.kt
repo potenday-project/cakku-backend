@@ -52,6 +52,7 @@ class CardTemplateItem(
      * 너비
      */
     val height: Int = 360,
+    var deleted: Boolean = false,
 ) {
     @CreatedDate
     lateinit var createdAt: LocalDateTime

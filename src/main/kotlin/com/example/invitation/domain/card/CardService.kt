@@ -47,7 +47,8 @@ class CardServiceImpl(
     ): Card {
         val cardTemplate = cardTemplateRepository.findByIdOrNull(cardCreateVo.cardTemplateId)
             ?: throw CardTemplateNotFoundException("카드 템플릿이 존재하지 않습니다. cardTemplateId: ${cardCreateVo.cardTemplateId}")
-        val cardTemplateItems = cardTemplateItemRepository.findByCardTemplateItemIdIn(cardCreateVo.cardTemplateItemIds)
+        val cardTemplateItems =
+            cardTemplateItemRepository.findByCardTemplateItemIdInAndDeleted(cardCreateVo.cardTemplateItemIds, false)
         val invitation = invitationRepository.findByIdOrNull(invitationId)
             ?: throw InvitationNotFoundException("초대장이 존재하지 않습니다. invitationId: $invitationId")
         val card = Card(
