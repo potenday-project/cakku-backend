@@ -1,5 +1,6 @@
 package com.example.invitation.ui.invitation
 
+import com.example.invitation.domain.analytics.AnalyticsEvent
 import com.example.invitation.domain.card.image.CardImageCreateVo
 import com.example.invitation.domain.card.image.CardImageService
 import com.example.invitation.domain.card.template.CardTemplate
@@ -11,8 +12,11 @@ import com.example.invitation.domain.file.FileRepository
 import com.example.invitation.domain.invitation.InvitationType
 import com.example.invitation.domain.invitation.detail.InvitationDetailType
 import com.example.invitation.domain.invitation.detail.InvitationDetailTypeRepository
+import com.example.invitation.infrastructure.mixpanel.MixpanelEventPublisher
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.mockito.Mockito
+import org.mockito.Mockito.doNothing
 import org.mockito.Mockito.`when`
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
@@ -23,9 +27,11 @@ import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
+import org.springframework.transaction.annotation.Transactional
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@Transactional
 class InvitationControllerTest {
     @Autowired
     lateinit var mockMvc: MockMvc
@@ -44,6 +50,15 @@ class InvitationControllerTest {
 
     @MockBean
     lateinit var cardImageService: CardImageService
+
+    @MockBean
+    lateinit var mixpanelEventPublisher: MixpanelEventPublisher
+
+    @BeforeEach
+    fun setup() {
+        doNothing().`when`(mixpanelEventPublisher)
+            .publish(any(String::class.java), any(AnalyticsEvent::class.java));
+    }
 
     @Test
     fun testGetInvitation() {
