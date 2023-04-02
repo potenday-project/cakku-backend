@@ -1,6 +1,5 @@
 package com.example.invitation.domain.card.template.item
 
-import com.example.invitation.domain.invitation.detail.InvitationDetailType
 import org.hibernate.annotations.GenericGenerator
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedDate
@@ -18,12 +17,6 @@ class CardTemplateItem(
         strategy = "com.example.invitation.infrastructure.SnowflakeIdGenerator",
     )
     val cardTemplateItemId: Long = 0L,
-    /**
-     * 초대 컨셉, 분위기
-     */
-    @ManyToOne
-    @JoinColumn(name = "invitationDetailTypeId")
-    val invitationDetailType: InvitationDetailType,
     /**
      * 이미지 주소
      */

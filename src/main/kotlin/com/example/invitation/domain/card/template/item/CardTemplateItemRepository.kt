@@ -8,11 +8,5 @@ interface CardTemplateItemRepository : JpaRepository<CardTemplateItem, Long> {
         deleted: Boolean
     ): List<CardTemplateItem>
 
-    @Suppress("FunctionName")
-    fun findByInvitationDetailType_invitationDetailTypeIdAndDeleted(
-        invitationDetailTypeId: Long,
-        deleted: Boolean
-    ): List<CardTemplateItem>
-
     fun findByDeleted(deleted: Boolean): List<CardTemplateItem>
 }
